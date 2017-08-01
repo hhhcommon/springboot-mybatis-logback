@@ -33,7 +33,7 @@ public class DynamicPropertySource extends MapPropertySource {
             public void run(){
                 map = dynamicLoadMapInfo();
             }
-        }, 1, 10, TimeUnit.SECONDS);
+        }, 1, 3600, TimeUnit.SECONDS);
     }
 
     public DynamicPropertySource(String name){
