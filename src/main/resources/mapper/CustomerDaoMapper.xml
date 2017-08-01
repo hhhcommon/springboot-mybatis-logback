@@ -3,7 +3,6 @@
 <mapper namespace="com.dao.CustomerDao">
 
     <resultMap type="com.model.Customer" id="customerMap">
-        <id property="id" column="ID"/>
         <result property="userId" column="USER_ID"/>
         <result property="birthday" column="BIRTHDAY"/>
     </resultMap>

@@ -20,7 +20,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class Application {
     public static void main(String[] args){
         SpringApplication app = new SpringApplication(Application.class);
-        app.addListeners(new ApplicationStartedEventListener());
+//        app.addListeners(new ApplicationStartedEventListener());
 //        app.addListeners(new ApplicationEnvironmentPreparedEventListener());
 //        app.addListeners(new ApplicationFailedEventListener());
 //        app.addListeners(new ApplicationPreparedEventListener());

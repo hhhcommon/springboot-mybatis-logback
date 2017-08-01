@@ -5,7 +5,7 @@ server.port=6789
 #jdbc.username=root
 #jdbc.password=
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
-spring.datasource.url=jdbc:mysql://localhost:3306/jjb-test?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
+spring.datasource.url=jdbc:mysql://localhost:3306/jjb-test
 spring.datasource.username=root
 spring.datasource.password=
 
