@@ -1,9 +1,19 @@
 server:
   port : 6789
 
+#mybatis:
+#  mapper-locations: classpath*:mapper/*.xml
+#  type-aliases-package: com.model
+
 spring:
   profiles:
       active: dev
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
 
 ---
 spring:

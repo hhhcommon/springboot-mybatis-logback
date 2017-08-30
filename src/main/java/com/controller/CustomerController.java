@@ -5,6 +5,7 @@ import com.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Desciption
@@ -12,20 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * CreateTime 2017/7/26 17:00
  * UpdateTime 2017/7/26 17:00
  */
-@Controller("/test")
-public class TestController {
+@RestController
+@RequestMapping("/customer")
+public class CustomerController {
 
     @Autowired
     CustomerService customerService;
 
-    @RequestMapping(value = "/aaa")
-    public void test(){
+    @RequestMapping(value = "/one")
+    public void getOne() {
         Customer customer = customerService.findCustomerByUserId("1101");
         System.out.println(customer.toString());
-    }
-
-    public static void main(String[] args){
-        TestController t = new TestController();
-        t.test();
     }
 }
