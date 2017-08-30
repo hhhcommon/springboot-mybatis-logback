@@ -7,14 +7,14 @@
 		<encoder>
 			<!-- 输出格式 -->
 			<pattern>
-				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+				%d{yyyy-MM-dd HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{36} - %msg%n
 			</pattern>
 		</encoder>
 	</appender>
 
 	<!-- error级别单独记录 -->
 	<appender name="errorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>logs/engine-error-today.log</file>
+		<file>logs/springboot-error.log</file>
 		<!-- 以day为单位自动回滚 -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>logs/engine-error/engine-error-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
@@ -37,7 +37,7 @@
 
 	<!-- warn级别单独记录 -->
 	<appender name="warnAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>logs/engine-warn-today.log</file>
+		<file>logs/springboot-warn.log</file>
 		<!-- 以day为单位自动回滚 -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>logs/engine-warn/engine-warn-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
@@ -59,7 +59,7 @@
 	</appender>
 
 	<appender name="infoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>logs/engine-info-today.log</file>
+		<file>logs/springboot-info.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>logs/engine-info/engine-info-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
 			<maxHistory>30</maxHistory>
