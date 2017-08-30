@@ -78,14 +78,13 @@
 		</filter>
 	</appender>
 
-	<logger name="com.ibatis" level="info" />
-	<logger name="com.ibatis.common.jdbc.SimpleDataSource" level="info" />
-	<logger name="com.ibatis.common.jdbc.ScriptRunner" level="info" />
-	<logger name="org.mybatis.generator" level="info" />
-	<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="info" />
-	<logger name="java.sql.Connection" level="info" />
-	<logger name="java.sql.Statement" level="info" />
-	<logger name="java.sql.PreparedStatement" level="info" />
+	<logger name="org.mybatis">
+		<level value="TRACE"/>
+	</logger>
+	<!--<logger name="java.sql">
+		<level value="WARN"/>
+	</logger>-->
+	<logger name="com.dao" level="DEBUG" />
 
 	<!-- 根，所有logger的祖先 -->
 	<root level="INFO">
