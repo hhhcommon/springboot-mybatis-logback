@@ -17,7 +17,7 @@
 		<file>logs/springboot-error.log</file>
 		<!-- 以day为单位自动回滚 -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>logs/engine-error/engine-error-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<fileNamePattern>logs/springboot-error/springboot-error-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
 			<maxHistory>30</maxHistory>
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<!-- or whenever the file size reaches 100MB -->
@@ -40,7 +40,7 @@
 		<file>logs/springboot-warn.log</file>
 		<!-- 以day为单位自动回滚 -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>logs/engine-warn/engine-warn-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<fileNamePattern>logs/springboot-warn/springboot-warn-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
 			<maxHistory>30</maxHistory>
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<!-- or whenever the file size reaches 100MB -->
@@ -61,7 +61,7 @@
 	<appender name="infoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>logs/springboot-info.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>logs/engine-info/engine-info-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<fileNamePattern>logs/springboot-info/springboot-info-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
 			<maxHistory>30</maxHistory>
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<!-- or whenever the file size reaches 100MB -->
