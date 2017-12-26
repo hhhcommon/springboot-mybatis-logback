@@ -32,6 +32,12 @@ public class DealerController {
 
     @RequestMapping(value = "/dealer", method = RequestMethod.GET)
     public ResultBody<? extends Object> getDetail(HttpServletRequest request, HttpServletResponse response) {
+        // 跨域请求处理
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, HEAD, PATCH, TRACE, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
+        response.setHeader("Content-type", "text/html;charset=UTF-8");
 
         JSONObject result = dealerService.getAllDealer();
         logger.info(result.toString());
@@ -41,6 +47,8 @@ public class DealerController {
 
     @RequestMapping(value = "/dealer/province", method = RequestMethod.GET)
     public ResultBody<? extends Object> getDetailByProvince(HttpServletRequest request, HttpServletResponse response) {
+        // 跨域请求处理
+        response.addHeader("Access-Control-Allow-Origin", "*");
 
         JSONObject result = dealerService.getDealerShopByProvince();
         logger.info(result.toString());
@@ -50,6 +58,8 @@ public class DealerController {
 
     @RequestMapping(value = "/dealer/city", method = RequestMethod.GET)
     public ResultBody<? extends Object> getDetailByCity(HttpServletRequest request, HttpServletResponse response) {
+        // 跨域请求处理
+        response.addHeader("Access-Control-Allow-Origin", "*");
 
         JSONObject result = dealerService.getDealerShopByCity();
         logger.info(result.toString());
