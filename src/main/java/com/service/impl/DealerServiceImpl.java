@@ -42,6 +42,8 @@ public class DealerServiceImpl implements DealerService {
 
             JSONObject map = new JSONObject();
             JSONArray datas = new JSONArray();
+            shopInfo.sort(Comparator.comparing(Dealer::getShopNum).reversed());
+
             shopInfo.forEach(shop -> {
                 List<Dealer> tmp = baseInfo.stream().filter(base -> StringUtils.equals(shop.getPhone(), base.getPhone())).collect(Collectors.toList());
                 if (tmp.size() > 0) {
@@ -59,6 +61,7 @@ public class DealerServiceImpl implements DealerService {
                     map.put(dealer.getCity(), location);
                 }
             });
+
             JSONObject result = new JSONObject();
             result.put("map", map);
             result.put("datas", datas);
