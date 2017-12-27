@@ -3,7 +3,9 @@ package com.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dao.DealerDao;
+import com.dao.DealerMonthSalesDao;
 import com.model.Dealer;
+import com.model.DealerMonthSales;
 import com.model.ProvinceDealer;
 import com.service.DealerService;
 import org.apache.commons.codec.binary.StringUtils;
@@ -27,6 +29,9 @@ public class DealerServiceImpl implements DealerService {
 
     @Autowired
     private DealerDao dealerDao;
+
+    @Autowired
+    private DealerMonthSalesDao dealerMonthSalesDao;
 
     /**
      * 经销商地图接口
@@ -190,6 +195,48 @@ public class DealerServiceImpl implements DealerService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    /**
+     * 折线图-经销商的单元销售总金额
+     *
+     * @return
+     */
+    @Override
+    public JSONArray getAmountByYearAndMonth() {
+
+        try{
+            List<DealerMonthSales> dealerMonthSalesList = dealerMonthSalesDao.findAmountByYearAndMonth();
+            List<DealerMonthSales> allYears = dealerMonthSalesDao.findAllYears();
+            if (dealerMonthSalesList.size() < 0 || allYears.size() < 0) {
+                return null;
+            }
+
+            JSONArray result = new JSONArray();
+            // 将不同年份的数据分类，将金额单位转为元
+            allYears.forEach(year -> {
+                List<DealerMonthSales> list = dealerMonthSalesList.stream()
+                                                .filter(sale -> sale.getYear()==year.getYear())
+                                                .map(sale -> sale.setAmount(sale.getAmount().divide(new BigDecimal(10000)).setScale(2, BigDecimal.ROUND_HALF_UP )))
+                                                .collect(Collectors.toList());
+                if (list.size() > 0) {
+                    JSONObject tmp = new JSONObject();
+                    JSONArray tmpArr = new JSONArray();
+                    tmp.put("year", year.getYear());
+                    // 按照月份排序
+                    list.sort(Comparator.comparing(DealerMonthSales::getMonth));
+                    list.forEach(sale -> tmpArr.add(sale.getAmount()));
+                    tmp.put("amount", tmpArr);
+                    result.add(tmp);
+                }
+            });
+
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 }

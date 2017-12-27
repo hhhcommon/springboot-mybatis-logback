@@ -1,5 +1,6 @@
 package com.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.model.Dealer;
 
@@ -17,4 +18,6 @@ public interface DealerService {
     JSONObject getDealerShopByProvince();
 
     JSONObject getDealerShopByCity();
+
+    JSONArray getAmountByYearAndMonth();
 }

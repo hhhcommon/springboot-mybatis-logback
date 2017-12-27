@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.model.Dealer;
 import com.service.DealerService;
@@ -30,6 +31,13 @@ public class DealerController {
     @Autowired
     DealerService dealerService;
 
+    /**
+     * 地图-经销商全国分布
+     *
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/dealer", method = RequestMethod.GET)
     public ResultBody<? extends Object> getDetail(HttpServletRequest request, HttpServletResponse response) {
         // 跨域请求处理
@@ -45,6 +53,13 @@ public class DealerController {
         return new ResultBody(ResponseResultEnum.SUCCESS.getFeatureType(), ResponseResultEnum.SUCCESS.getDescription(), result);
     }
 
+    /**
+     * 柱状图-经销商省份分布列表
+     *
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/dealer/province", method = RequestMethod.GET)
     public ResultBody<? extends Object> getDetailByProvince(HttpServletRequest request, HttpServletResponse response) {
         // 跨域请求处理
@@ -56,12 +71,37 @@ public class DealerController {
         return new ResultBody(ResponseResultEnum.SUCCESS.getFeatureType(), ResponseResultEnum.SUCCESS.getDescription(), result);
     }
 
+    /**
+     * 柱状图-经销商城市分布列表
+     *
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/dealer/city", method = RequestMethod.GET)
     public ResultBody<? extends Object> getDetailByCity(HttpServletRequest request, HttpServletResponse response) {
         // 跨域请求处理
         response.addHeader("Access-Control-Allow-Origin", "*");
 
         JSONObject result = dealerService.getDealerShopByCity();
+        logger.info(result.toString());
+
+        return new ResultBody(ResponseResultEnum.SUCCESS.getFeatureType(), ResponseResultEnum.SUCCESS.getDescription(), result);
+    }
+
+    /**
+     * 折线图-每月经销商的销售总金额
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/dealer/monthAmount", method = RequestMethod.GET)
+    public ResultBody<? extends Object> getAmountByYearAndMonth(HttpServletRequest request, HttpServletResponse response) {
+        // 跨域请求处理
+        response.addHeader("Access-Control-Allow-Origin", "*");
+
+        JSONArray result = dealerService.getAmountByYearAndMonth();
         logger.info(result.toString());
 
         return new ResultBody(ResponseResultEnum.SUCCESS.getFeatureType(), ResponseResultEnum.SUCCESS.getDescription(), result);
