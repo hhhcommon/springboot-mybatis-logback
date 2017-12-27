@@ -87,7 +87,7 @@ public class DealerServiceImpl implements DealerService {
     @Override
     public JSONObject getDealerShopByProvince() {
 
-        try{
+        try {
             // 将经销商的省份信息放入对象中
             List<Dealer> baseInfo = dealerDao.findAll();
             List<Dealer> shopInfo = dealerDao.findAllShop();
@@ -149,7 +149,7 @@ public class DealerServiceImpl implements DealerService {
     @Override
     public JSONObject getDealerShopByCity() {
 
-        try{
+        try {
             // 将经销商的城市信息放入对象中
             List<Dealer> baseInfo = dealerDao.findAll();
             List<Dealer> shopInfo = dealerDao.findAllShop();
@@ -206,7 +206,7 @@ public class DealerServiceImpl implements DealerService {
     @Override
     public JSONArray getAmountByYearAndMonth() {
 
-        try{
+        try {
             List<DealerMonthSales> dealerMonthSalesList = dealerMonthSalesDao.findAmountByYearAndMonth();
             List<DealerMonthSales> allYears = dealerMonthSalesDao.findAllYears();
             if (dealerMonthSalesList.size() < 0 || allYears.size() < 0) {
@@ -217,13 +217,13 @@ public class DealerServiceImpl implements DealerService {
             // 将不同年份的数据分类，将金额单位转为元
             allYears.forEach(year -> {
                 List<DealerMonthSales> list = dealerMonthSalesList.stream()
-                                                .filter(sale -> sale.getYear()==year.getYear())
-                                                .map(sale -> sale.setAmount(sale.getAmount().divide(new BigDecimal(10000)).setScale(2, BigDecimal.ROUND_HALF_UP )))
-                                                .collect(Collectors.toList());
+                        .filter(sale -> sale.getYear() == year.getYear())
+                        .map(sale -> sale.setAmount(sale.getAmount().divide(new BigDecimal(10000)).setScale(2, BigDecimal.ROUND_HALF_UP)))
+                        .collect(Collectors.toList());
                 if (list.size() > 0) {
                     JSONObject tmp = new JSONObject();
                     JSONArray tmpArr = new JSONArray();
-                    tmp.put("year", year.getYear());
+                    tmp.put("year", year.getYear() + "年");
                     // 按照月份排序
                     list.sort(Comparator.comparing(DealerMonthSales::getMonth));
                     list.forEach(sale -> tmpArr.add(sale.getAmount()));
