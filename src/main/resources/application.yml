@@ -67,3 +67,6 @@ ms:
     username: risk
     password: QxI^$pff92O$
     maxActive: 500
+flow:
+  #生产 UAT-http://tgapiuat.homefax.cn/web/portal
+  shenyihao: http://139.224.144.178:9181/flow/syncAudit?processKey=flow21

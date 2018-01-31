@@ -3,23 +3,25 @@ package com.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
+import com.model.PaginatedResult;
+import com.service.SBOrderService;
+import com.util.Enum.PageConstant;
 import com.util.Enum.ResponseResultEnum;
 import com.util.HttpConnectionUtils;
+import com.util.PageUtil;
 import com.util.ResultBody;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.text.html.Option;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Desciption 深一号决策流调用
@@ -28,12 +30,16 @@ import java.util.UUID;
  * UpdateTime 2018/01/26 18:14
  */
 @RestController
+@Slf4j
 public class ShenYiHaoController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Value("${flow.shenyihao}")
     private String api_url;
+
+    @Autowired
+    private SBOrderService sbOrderService;
 
     @RequestMapping(value = "/syh", method = RequestMethod.POST)
     public ResultBody<? extends Object> getDetail(HttpServletRequest request, HttpServletResponse response) {
@@ -129,5 +135,39 @@ public class ShenYiHaoController {
         }
 
 //        return new ResultBody(ResponseResultEnum.SUCCESS.getFeatureType(), ResponseResultEnum.SUCCESS.getDescription(), resultObj.getJSONObject("data"));
+    }
+
+    @PostMapping("/syh/order")
+    public ResultBody<? extends Object> getOrders(HttpServletRequest request, @RequestBody String paramsString, HttpServletResponse response) {
+
+        JSONObject params = JSON.parseObject(paramsString);
+        log.info("params:{}", params);
+
+        int page = PageUtil.parsePage(params.getString("pageString"), PageConstant.PAGE);
+        int perPage = PageUtil.parsePerPage(params.getString("perPageString"), PageConstant.PER_PAGE);
+
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("startDate", Optional
+                .ofNullable(params.getJSONArray("rq"))
+                .map(a -> a.size() > 0 ? a.get(0) : "")
+                .get());
+
+        map.put("endDate", Optional
+                .ofNullable(params.getJSONArray("rq"))
+                .map(a -> a.size() > 1 ? a.get(1) : "")
+                .get());
+        map.put("ghdw", params.getString("ghdw").replaceAll("\\s*", "")); // 去掉空格
+        map.put("page", page);
+        map.put("perPage", perPage);
+
+        log.info("map:{}", map);
+
+        PaginatedResult result = new PaginatedResult()
+                .setData(sbOrderService.listOrders(map))
+                .setCurrentPage(page)
+                .setTotal(sbOrderService.countOrders(map))
+                .setTotalPage(PageUtil.calculateTotalPage(sbOrderService.countOrders(map), perPage));
+
+        return new ResultBody(ResponseResultEnum.SUCCESS.getFeatureType(), ResponseResultEnum.SUCCESS.getDescription(), result);
     }
 }
