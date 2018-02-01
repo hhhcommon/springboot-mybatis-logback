@@ -4,6 +4,7 @@
 
     <resultMap id="sbOrder" type="com.model.SBOrder">
         <result column="id" property="id"/>
+        <result column="sjly" property="sjly"/>
         <result column="shbz" property="shbz"/>
         <result column="gbbz" property="gbbz"/>
         <result column="rq" property="rq"/>
@@ -61,6 +62,7 @@
                 and ghdw LIKE CONCAT('%', #{ghdw}, '%')
             </if>
         </where>
+        ORDER BY rq DESC
         LIMIT #{page}, #{perPage}
     </select>
 

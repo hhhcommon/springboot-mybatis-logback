@@ -147,15 +147,19 @@ public class ShenYiHaoController {
         int perPage = PageUtil.parsePerPage(params.getString("perPageString"), PageConstant.PER_PAGE);
 
         Map<String, Object> map = Maps.newHashMap();
-        map.put("startDate", Optional
-                .ofNullable(params.getJSONArray("rq"))
-                .map(a -> a.size() > 0 ? a.get(0) : "")
-                .get());
+        try {
+            map.put("startDate", Optional
+                    .ofNullable(params.getJSONArray("rq"))
+                    .map(a -> a.size() > 0 ? a.get(0) : "")
+                    .get());
 
-        map.put("endDate", Optional
-                .ofNullable(params.getJSONArray("rq"))
-                .map(a -> a.size() > 1 ? a.get(1) : "")
-                .get());
+            map.put("endDate", Optional
+                    .ofNullable(params.getJSONArray("rq"))
+                    .map(a -> a.size() > 1 ? a.get(1) : "")
+                    .get());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         map.put("ghdw", params.getString("ghdw").replaceAll("\\s*", "")); // 去掉空格
         map.put("page", page);
         map.put("perPage", perPage);

@@ -24,6 +24,7 @@ public class SBOrder {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
+    private String sjly;    // 数据来源（松堡王国|松堡家俬）
     private String shbz;    // 审核标志
     private String gbbz;    // 关闭标志
     private Date rq;        // 日期
