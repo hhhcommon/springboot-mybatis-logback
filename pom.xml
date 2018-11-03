@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>patrickleee</groupId>
-    <artifactId>risk-service</artifactId>
+    <artifactId>risk-service1</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -145,7 +145,7 @@
         </dependency>
 
         <!--bangsun-->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.bangsun</groupId>
             <artifactId>frms-base-4.1.3</artifactId>
             <version>1.0</version>
@@ -154,7 +154,7 @@
             <groupId>org.bangsun</groupId>
             <artifactId>bsfit-api-1.0.1</artifactId>
             <version>1.0</version>
-        </dependency>
+        </dependency> -->
 
         <!--json-->
         <dependency>

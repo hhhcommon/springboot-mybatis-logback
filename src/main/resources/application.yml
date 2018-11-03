@@ -34,9 +34,9 @@ spring:
 ms:
   db:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://139.224.146.23:3306/risk_db?useUnicode=true&characterEncoding=UTF-8&useSSL=false
-    username: libo
-    password: QxI^$pff92O$
+    url: jdbc:mysql://192.168.1.210:3306/risk_db?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123
     maxActive: 500
 flow:
   #生产 UAT-http://tgapiuat.homefax.cn/web/portal
